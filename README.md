@@ -1,3 +1,3 @@
 # Power-BI-Projects
 
-<a href="www.digitalnatura.net">Resume </a>
+<a href="https://www.digitalnatura.net">Resume </a>
