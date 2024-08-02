@@ -1,6 +1,11 @@
 Name: Power BI Report Overwrite
 ON: push
 
-: # Overwrite current Power BI Reports in Power BI Service
-: # Reports published to the web with may take up to 1 hour to update
-: # generally very fast 1-2 min and does not require an update to data or 
+jobs:
+  PowerBIPS1Overwrite:
+    runs-on: ubuntu-latest
+
+      steps: 
+        - name: Build Module
+          shell: pwsh
+          run: ./PowerBIOverwrite.ps1
