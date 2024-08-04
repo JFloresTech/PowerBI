@@ -1,11 +1,14 @@
-Name: Power BI Report Overwrite
-ON: push
+name: Power BI Report Overwrite
+on:
+  push:
+    paths: 
+      - ./Europe Sales Report.pbix
 
 jobs:
-  PowerBIPS1Overwrite:
+  PowerBIps1Overwrite:
     runs-on: ubuntu-latest
-
-      steps: 
-        - name: Build Module
-          shell: pwsh
-          run: ./PowerBIOverwrite.ps1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Module
+        shell: pwsh
+        run: ./PowerBIOverwrite.ps1
