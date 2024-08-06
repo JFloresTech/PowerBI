@@ -3,10 +3,13 @@ on:
   push:
     paths: 
       - ./Europe Sales Report.pbix
+  workflow_dispatch:
 
 jobs:
   PowerBIps1Overwrite:
     runs-on: ubuntu-latest
+    env:
+          GHSecret: ${{secrets.POWERBISPN}}
     steps:
       - uses: actions/checkout@v4
       - name: Build Module
