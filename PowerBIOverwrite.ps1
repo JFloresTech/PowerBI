@@ -12,7 +12,7 @@ Install-Module -Name MicrosoftPowerBIMgmt
 $PbiSecurePassword = ConvertTo-SecureString (ConvertFrom-Json $Env:POWERBISPPWD).SecretText -Force -AsPlainText
 $PbiCredential = New-Object Management.Automation.PSCredential($Env:POWERBIAPPID, $PbiSecurePassword)
 
-Connect-PowerBIServiceAccount -ServicePrincipal -TenantId $Env:JFTECHTENANTID -Credential ($PbiCredential)
+Connect-PowerBIServiceAccount -ServicePrincipal -TenantId "f36e21c5-5429-44e6-af9a-509c3aa07761" -Credential ($PbiCredential)
 
 # New-PowerBIReport will push a the .PBIX to the workspace 
 # Replace the current report with the new report file from the targe path with an Overwrite reflected in a few mintues to 1 hour
