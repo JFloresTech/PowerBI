@@ -9,7 +9,10 @@ jobs:
   PowerBIps1Overwrite:
     runs-on: ubuntu-latest
     env:
-          GHSecret: ${{secrets.POWERBISPN}}
+          POWERBISPPWD: ${{secrets.POWERBISPPWD}}
+          JFTECHTENANTID: ${{secrets.JFTECHTENANTID}}
+          ESRWKSPID: ${{secrets.ESRWKSPID}}
+          POWERBIAPPID: ${{secrets.POWERBIAPPID}}
     steps:
       - uses: actions/checkout@v4
       - name: Build Module

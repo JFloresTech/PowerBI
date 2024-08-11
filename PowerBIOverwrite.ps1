@@ -1,21 +1,19 @@
-#GHSecret is the name of an environment variable defined in PowerBIReportOverwrite.yml
-# this will authenticate
 
+#This will allow unattended installation of pwsh modules
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope LocalMachine
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 
-Install-Module Microsoft.Graph.Application, Microsoft.Graph.Authentication
+# Pwsh Power BI Module is Small, you could do  MicrosoftPowerBIMgmt.Reports to make it even smaller
+Install-Module -Name MicrosoftPowerBIMgmt
 
-Connect-MgGraph
+# GHSecret is the name of an environment variable defined in PowerBIReportOverwrite.yml
+# this will authenticate
 
+$PbiSecurePassword = ConvertTo-SecureString (ConvertFrom-Json $Env:POWERBISPPWD).SecretText -Force -AsPlainText
+$PbiCredential = New-Object Management.Automation.PSCredential($Env:POWERBIAPPID, $PbiSecurePassword)
 
-$app = 'fd467211-dac5-4f3e-a71f-e99e561a7ecc'
+Connect-PowerBIServiceAccount -ServicePrincipal -TenantId $Env:JFTECHTENANTID -Credential ($PbiCredential)
 
-# Creates a service principal
-$sp = New-AzureADServicePrincipal -AppId $app
-
-# Get the service principal key
-$key = New-AzureADServicePrincipalPasswordCredential -ObjectId $sp.ObjectId
-
-#Install-Module -Name MicrosoftPowerBIMgmt -y
-
-#Connect-PowerBIServiceAccount -Tenant $GHSecret.TenentID -ApplicationId $GHSecret.ApplicationId -ServicePrincipal $GHSecret.ServicePrincipal -Credential $GHSecret.Credential
+# New-PowerBIReport will push a the .PBIX to the workspace 
+# Replace the current report with the new report file from the targe path with an Overwrite reflected in a few mintues to 1 hour
+New-PowerBIReport -Path "./Europe Sales Report.pbix" -Name 'Europe Sales Report' -WorkspaceId $ESRWKSPID -ConflictAction Overwrite
