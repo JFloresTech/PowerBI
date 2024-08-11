@@ -1,6 +1,6 @@
 
 #This will allow unattended installation of pwsh modules
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+#Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
 Set-PSRepository PSGallery -InstallationPolicy Trusted
 
 # Pwsh Power BI Module is Small, you could do  MicrosoftPowerBIMgmt.Reports to make it even smaller
