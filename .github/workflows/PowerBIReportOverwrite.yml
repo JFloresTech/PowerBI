@@ -3,7 +3,7 @@ on:
   # This triggers when Europe Sales Report.pbix is pushed to in this branch
   push:
     paths: 
-      - ./Europe Sales Report.pbix
+      Europe Sales Report.pbix
   # This workflow can also be run manually via a button in the Github action page for this workflow
   workflow_dispatch:
 
