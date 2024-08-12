@@ -35,13 +35,13 @@ Azure:
 <h2>PowerShell Automation:</h2>
 PowerBIServicePrincipalSetup.ps1:
 <ul>
-<li>
-  - PowerSehll script template for creating the service principal credentials after the application and Power BI service have been configured.
-</li>
+<li>PowerSehll script template for creating the service principal credentials after the application and Power BI service have been configured.</li>
 </ul>
 PowerBIOverwrite.ps1:
-  - Used by the Github workflow PowerBIReportOverwrite.yml to perform the task of updating the report.
-  - Uses Github Secrets to securely store and retrieve secrets, instead of storing in the script.
+<ul>
+<li>Used by the Github workflow PowerBIReportOverwrite.yml to perform the task of updating the report.</li>
+<li>Uses Github Secrets to securely store and retrieve secrets, instead of storing in the script.</li>
+</ul>
 
 <h2>Github Actions Automation:</h2>
 PowerBIReportOverwrite.yml:
