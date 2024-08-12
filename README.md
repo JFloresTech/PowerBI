@@ -46,5 +46,8 @@ PowerBIOverwrite.ps1:
 </ul>
 
 <h2>Github Actions Automation:</h2>
+<ul>
 PowerBIReportOverwrite.yml:
-- The Github workflow that provisions the runner, imports the repository and secrets in to the environment, and then runs the PowerBIOverwrite.ps1 to perform the task, and send notification.
+<li>The Github workflow that provisions the runner, imports the repository and secrets in to the environment, and then runs the PowerBIOverwrite.ps1 to perform the task, and send notification.</li>
+</ul>
+/ul
