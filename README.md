@@ -33,12 +33,12 @@ Azure:
   - Made more secure by using a secured secrets store like Github Secrets.
 
 <h2>PowerShell Automation:</h2>
-- PowerBIServicePrincipalSetup.ps1:
+PowerBIServicePrincipalSetup.ps1:
   - PowerSehll script template for creating the service principal credentials after the application and Power BI service have been configured.
-- PowerBIOverwrite.ps1:
+PowerBIOverwrite.ps1:
   - Used by the Github workflow PowerBIReportOverwrite.yml to perform the task of updating the report.
   - Uses Github Secrets to securely store and retrieve secrets, instead of storing in the script.
 
 <h2>Github Actions Automation:</h2>
-  PowerBIReportOverwrite.yml:
-  - The Github workflow that provisions the runner, imports the repository and secrets in to the environment, and then runs the PowerBIOverwrite.ps1 to perform the task, and send notification.
+PowerBIReportOverwrite.yml:
+- The Github workflow that provisions the runner, imports the repository and secrets in to the environment, and then runs the PowerBIOverwrite.ps1 to perform the task, and send notification.
