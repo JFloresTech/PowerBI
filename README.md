@@ -28,8 +28,10 @@ What's included:
 <h2>Azure and Power BI Service Configuration</h2>
 Azure:
 An Enterprise Application registration is needed to create a service principal which can be used to connect to services and perform tasks unattended and more securely than a user account.
-- This can be done in the Azure portal or PowerShell
-- as shown in this this MS article <a href="https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal#create-an-azure-ad-app-by-using-powershell">Embed Power BI content</a>
+<ul>
+<li>This can be done in the Azure portal or PowerShell</li>
+<li>as shown in this this MS article <a href="https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal#create-an-azure-ad-app-by-using-powershell">Embed Power BI content</a></li>
+</ul>
 
 <h2>PowerShell Automation</h2>
 PowerBIServicePrincipalSetup.ps1:
