@@ -1,8 +1,10 @@
 name: Power BI Report Overwrite
 on:
+  # This triggers when Europe Sales Report.pbix is pushed to in this branch t
   push:
     paths: 
       - ./Europe Sales Report.pbix
+  # This workflow can also be run manually via button in the 
   workflow_dispatch:
 
 jobs:
