@@ -29,22 +29,23 @@ What's included:
 Azure:
 An Enterprise Application registration is needed to create a service principal which can be used to connect to services and perform tasks unattended and more securely than a user account.
 <ul>
-<li>A Service Principal is kind of like a User Principal in that it has credentials for signing in to services, and can be assigned permissions for authorization.</li>
-<li> A Service Principal authentication with the Service Principal credentials is not as secure as using a SSL certificate or using a Managed Identity token.</li>
-<li>Made more secure by using a secured secrets store like Github Secrets.</li>
+<li>This can be done in the Azure portal or PowerShell</li>
+<li>as shown in this this MS article <a href="https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal#create-an-azure-ad-app-by-using-powershell">Embed Power BI content</a></li>
 </ul>
 
-<h2>PowerShell Automation:</h2>
+<h2>PowerShell Automation</h2>
 PowerBIServicePrincipalSetup.ps1:
 <ul>
 <li>PowerShell script template for creating the service principal credentials after the application and Power BI service have been configured.</li>
 </ul>
-PowerBIOverwrite.ps1:
+PowerBIReportOverwrite.ps1:
 <ul>
 <li>Used by the Github workflow PowerBIReportOverwrite.yml to perform the task of updating the report.</li>
 <li>Uses Github Secrets to securely store and retrieve secrets, instead of storing in the script.</li>
 </ul>
 
-<h2>Github Actions Automation:</h2>
+<h2>Github Actions Automation</h2>
 PowerBIReportOverwrite.yml:
-- The Github workflow that provisions the runner, imports the repository and secrets in to the environment, and then runs the PowerBIOverwrite.ps1 to perform the task, and send notification.
+<ul>
+<li>The Github workflow that provisions the runner, imports the repository and secrets in to the environment, and then runs the PowerBIOverwrite.ps1 to perform the task, and send notification.</li>
+</ul>
