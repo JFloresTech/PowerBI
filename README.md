@@ -27,15 +27,17 @@ What's included:
 
 <h2>Azure and Power BI Service Configuration</h2>
 Azure:
-  An Enterprise Application registration is needed to create a service principal which can be used to connect to services and perform tasks unattended and more securely than a user account.
-  - A Service Principal is kind of like a User Principal in that it has credentials for signing in to services, and can be assigned permissions for authorization.
-  - A Service Principal authentication with the Service Principal credentials is not as secure as using a SSL certificate or using a Managed Identity token.
-  - Made more secure by using a secured secrets store like Github Secrets.
+An Enterprise Application registration is needed to create a service principal which can be used to connect to services and perform tasks unattended and more securely than a user account.
+<ul>
+<li>A Service Principal is kind of like a User Principal in that it has credentials for signing in to services, and can be assigned permissions for authorization.</li>
+<li> A Service Principal authentication with the Service Principal credentials is not as secure as using a SSL certificate or using a Managed Identity token.</li>
+<li>Made more secure by using a secured secrets store like Github Secrets.</li>
+</ul>
 
 <h2>PowerShell Automation:</h2>
 PowerBIServicePrincipalSetup.ps1:
 <ul>
-<li>PowerSehll script template for creating the service principal credentials after the application and Power BI service have been configured.</li>
+<li>PowerShell script template for creating the service principal credentials after the application and Power BI service have been configured.</li>
 </ul>
 PowerBIOverwrite.ps1:
 <ul>
