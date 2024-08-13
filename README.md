@@ -119,9 +119,9 @@ For the Tenant.Read.All and Tenant.ReadWrite.All scopes Admin consent is needed.
 Screenshot of adding API permissions for the service principal
 
 <h3>Step 5 - Add the service principal to your workspace</h3>
-To enable your Azure AD app access artifacts such as reports, dashboards and datasets in the Power BI service, add the service principal entity, or the security group that includes your service principal, as a member or admin to your workspace.
+To enable your Azure AD app access artifacts such as reports, dashboards and datasets in the Power BI service, add the security group that includes your service principal, as a member or admin to your workspace.
 
-Alternative you can add the service principal as Power BI administrator via Roles and administrators part of your Azure Active Directory management.
+Alternatively you can add the service principal as Fabric administrator via Priviliged Identity Management with an Entra AD P2 license included with E5.
 
 <h2>PowerShell Automation</h2>
 PowerBIServicePrincipalSetup.ps1:
