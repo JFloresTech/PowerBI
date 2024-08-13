@@ -64,7 +64,7 @@ See the create a basic group and add members using Azure AD article for the step
 
 Creating an Azure AD security group using a script
 Azure CLI PowerShell
-<code>
+<pre><code>
 # Required to sign in as admin
 Connect-AzureAD
 
@@ -73,7 +73,7 @@ $group = New-AzureADGroup -DisplayName <GroupName> -SecurityEnabled $true -MailE
 
 # Add the service principal to the group
 Add-AzureADGroupMember -ObjectId $($group.ObjectId) -RefObjectId $($sp.ObjectId)
-</code>
+</code></pre>
 <h3>Step 3 - Enable the Power BI service admin settings</h3>
 For an Azure AD app to be able to access the Power BI content and APIs, a Power BI admin needs to enable service principal access in the Power BI admin portal.
 <ul>
