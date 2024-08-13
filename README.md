@@ -27,16 +27,7 @@ What's included:
 
 <h2>Azure and Power BI Service Configuration</h2>
 <h3>Step 1 - Create an Azure AD app</h3>
-Create an Azure AD app using one of these methods and store the following information securely as it is needed:
-
-Azure app's Application ID
-Azure AD app's secret
-Azure app's Tenant ID
-Creating an Azure AD app in the Microsoft Azure portal
-See the create an Azure AD app article for the steps. You can skip the 'Role' and 'Policy' parts.
-
-Creating an Azure AD app using a script
-This section includes a sample script to create a new Azure AD app and Service Principal credentials using PowerShell.
+Creating an Azure AD app using a PowerShell script
 
 <Pre><code>
 # Microsoft.Graph is very large so its better to only install the modules needed
@@ -68,10 +59,7 @@ ConvertTo-Json $ServicePrincipalPassword > "[Your Path here]"
 <h3>Step 2 - Create an Azure AD security group</h3>
 Your service principal doesn't have access to any of your Power BI content and APIs. To give the service principal access, create a security group in Azure AD, and add the service principal you created to that security group.
 
-Creating an Azure AD security group in the Microsoft Azure portal
-See the create a basic group and add members using Azure AD article for the steps.
-
-Creating an Azure AD security group using a script
+Creating an Azure AD security group using a PowerShell script
 <pre><code>
 # Microsoft.Graph is very large so its better to only install the modules needed
 Import-Module Microsoft.Graph.Application
@@ -100,7 +88,7 @@ Screenshot of the Development settings in the Power BI Admin portal
 <h3>Step 4 - Required API permissions</h3>
 To access the Power BI APIs vai the Power BI CLI, the service principal need several scope assigned. In the table below is an overview of the required scopes.
 <ul>
-<il>Admin: Tenant.Read.All, Tenant.ReadWrite.All</il>
+<li>Admin: Tenant.Read.All, Tenant.ReadWrite.All</li>
 <li>App: App.Read.All</li>
 <li>Capacity: Capacity.Read.All, Capacity.ReadWrite.All</li>
 <li>Dashboard: Dashboard.Read.All, Dashboard.ReadWrite.All, Content.Create</li>
