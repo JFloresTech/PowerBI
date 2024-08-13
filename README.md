@@ -39,7 +39,7 @@ Creating an Azure AD app using a script
 This section includes a sample script to create a new Azure AD app using the Azure CLI or PowerShell.
 
 Azure CLI PowerShell
-<code>
+<Pre><code>
 # The app ID - $app.appid
 # The service principal object ID - $sp.objectId
 # The app key - $key.value
@@ -55,7 +55,7 @@ $sp = New-AzureADServicePrincipal -AppId $app.AppId
 
 # Get the service principal key
 $key = New-AzureADServicePrincipalPasswordCredential -ObjectId $sp.ObjectId
-</code>
+</code></pre>
 <h3>Step 2 - Create an Azure AD security group</h3>
 Your service principal doesn't have access to any of your Power BI content and APIs. To give the service principal access, create a security group in Azure AD, and add the service principal you created to that security group.
 
