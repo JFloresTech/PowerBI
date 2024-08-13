@@ -72,7 +72,6 @@ Creating an Azure AD security group in the Microsoft Azure portal
 See the create a basic group and add members using Azure AD article for the steps.
 
 Creating an Azure AD security group using a script
-Azure CLI PowerShell
 <pre><code>
 # Microsoft.Graph is very large so its better to only install the modules needed
 Import-Module Microsoft.Graph.Application
@@ -100,18 +99,18 @@ Screenshot of the Development settings in the Power BI Admin portal
 
 <h3>Step 4 - Required API permissions</h3>
 To access the Power BI APIs vai the Power BI CLI, the service principal need several scope assigned. In the table below is an overview of the required scopes.
-
-admin	Tenant.Read.All, Tenant.ReadWrite.All
-app	App.Read.All
-capacity	Capacity.Read.All, Capacity.ReadWrite.All
-dashboard	Dashboard.Read.All, Dashboard.ReadWrite.All, Content.Create
-dataflow	Dataflow.ReadWrite.All, Dataflow.Read.All
-dataset	Dataset.ReadWrite.All, Dataset.Read.All
-feature	None
-gateway	Dataset.Read.All, Dataset.ReadWrite.All
-import	Dataset.ReadWrite.All
-report	Report.Read.All, Report.ReadWrite.All, Dataset.Read.All, Dataset.ReadWrite.All
-workspace	Workspace.Read.All, Workspace.ReadWrite.All
+<ul>
+<il>Admin: Tenant.Read.All, Tenant.ReadWrite.All</il>
+<li>App: App.Read.All</li>
+<li>Capacity: Capacity.Read.All, Capacity.ReadWrite.All</li>
+<li>Dashboard: Dashboard.Read.All, Dashboard.ReadWrite.All, Content.Create</li>
+<li>Dataflow: Dataflow.ReadWrite.All, Dataflow.Read.All</li>
+<li>Dataset: Dataset.ReadWrite.All, Dataset.Read.All</li>
+<li>Gateway: Dataset.Read.All, Dataset.ReadWrite.All</li>
+<li>Import: Dataset.ReadWrite.All</li>
+<li>Report: Report.Read.All, Report.ReadWrite.All, Dataset.Read.All, Dataset.ReadWrite.All</li>
+<li>Workspace: Workspace.Read.All, Workspace.ReadWrite.All</li>
+</ul>
 Adding the scopes as API permissions can be done via the Azure Portal on the management pane of the service principal.
 
 Note
