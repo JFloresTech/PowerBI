@@ -36,25 +36,34 @@ Creating an Azure AD app in the Microsoft Azure portal
 See the create an Azure AD app article for the steps. You can skip the 'Role' and 'Policy' parts.
 
 Creating an Azure AD app using a script
-This section includes a sample script to create a new Azure AD app using the Azure CLI or PowerShell.
+This section includes a sample script to create a new Azure AD app and Service Principal credentials using PowerShell.
 
-Azure CLI PowerShell
 <Pre><code>
-# The app ID - $app.appid
-# The service principal object ID - $sp.objectId
-# The app key - $key.value
+# Microsoft.Graph is very large so its better to only install the modules needed
+Import-Module Microsoft.Graph.Application
+Import-Module Microsoft.Graph.Authentication
+Connect-MgGraph
 
-# Sign in as a user that's allowed to create an app
-Connect-AzureAD
+#Create a new Azure Application
+$params = @{
+    DisplayName = "[App Name Here]"
+    Web = @{
+        RedirectUris = "https://localhost:44322"
+        HomePageUrl = "https://localhost:44322"
+    }
+}
+$App = New-MgApplication @params
+$AppId = $App.AppId
 
-# Create a new Azure AD web application
-$app = New-AzureADApplication -DisplayName <ApplicationName> -Homepage "https://localhost:44322" -ReplyUrls "https://localhost:44322"
+# Create a service principal
+$ServicePrinciple = New-MgServicePrincipal -AppId $AppId
+$ServicePrincipalId = $ServicePrinciple.Id
 
-# Creates a service principal
-$sp = New-AzureADServicePrincipal -AppId $app.AppId
+# Create the Service Principal password
+$ServicePrincipalPassword = Add-MgServicePrincipalPassword -ServicePrincipalId $ServicePrincipalId
 
-# Get the service principal key
-$key = New-AzureADServicePrincipalPasswordCredential -ObjectId $sp.ObjectId
+# Useful to store the Service Principal Password as JSON if you want to store it in a vault or use it else where
+ConvertTo-Json $ServicePrincipalPassword > "[Your Path here]"
 </code></pre>
 <h3>Step 2 - Create an Azure AD security group</h3>
 Your service principal doesn't have access to any of your Power BI content and APIs. To give the service principal access, create a security group in Azure AD, and add the service principal you created to that security group.
@@ -65,14 +74,16 @@ See the create a basic group and add members using Azure AD article for the step
 Creating an Azure AD security group using a script
 Azure CLI PowerShell
 <pre><code>
-# Required to sign in as admin
-Connect-AzureAD
+# Microsoft.Graph is very large so its better to only install the modules needed
+Import-Module Microsoft.Graph.Application
+Import-Module Microsoft.Graph.Authentication
+Connect-MgGraph
+  
+# Create a Security group for the Power BI Service Fabric API access
+$group = New-MgGroup -DisplayName "[Group Name Here]" -SecurityEnabled -MailEnabled:$False -MailNickName "notSet"
 
-# Create an Azure AD security group
-$group = New-AzureADGroup -DisplayName <GroupName> -SecurityEnabled $true -MailEnabled $false -MailNickName notSet
-
-# Add the service principal to the group
-Add-AzureADGroupMember -ObjectId $($group.ObjectId) -RefObjectId $($sp.ObjectId)
+# Add the App to the group
+New-MgGroupMember -GroupId $($group.Id) -DirectoryObjectId $ServicePrincipalId
 </code></pre>
 <h3>Step 3 - Enable the Power BI service admin settings</h3>
 For an Azure AD app to be able to access the Power BI content and APIs, a Power BI admin needs to enable service principal access in the Power BI admin portal.
