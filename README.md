@@ -18,7 +18,7 @@ What's included:
 - Github Secrets for secure encrypted storage of secrets
 
 <h2>Power BI Report</h2>
-<a href="https://app.powerbi.com/view?r=eyJrIjoiNWY5MDgxMWQtYTM2Zi00YmExLTg5NzktZDhmMTk5YzBjOWQ0IiwidCI6ImYzNmUyMWM1LTU0MjktNDRlNi1hZjlhLTUwOWMzYWEwNzc2MSJ9&pageName=ReportSectionb20cb185ce329cea8bfc"><img src="https://github.com/JFloresTech/PowerBI/blob/main/Europe%20Sales%20Report%20.jpg"></a>
+<a href="https://app.powerbi.com/view?r=eyJrIjoiNWY5MDgxMWQtYTM2Zi00YmExLTg5NzktZDhmMTk5YzBjOWQ0IiwidCI6ImYzNmUyMWM1LTU0MjktNDRlNi1hZjlhLTUwOWMzYWEwNzc2MSJ9&pageName=ReportSectionb20cb185ce329cea8bfc" target="_blank" rel="noopener noreferrer"><img src="https://github.com/JFloresTech/PowerBI/blob/main/Europe%20Sales%20Report%20.jpg"></a>
 
   This Power BI report is Publish to Web (Public) and is updated by PowerBIReportOverwrite.yml workflow.
   - CSV import of dataset 
