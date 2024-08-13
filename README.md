@@ -26,12 +26,92 @@ What's included:
   - DAX caclulated columns and measures 
 
 <h2>Azure and Power BI Service Configuration</h2>
-Azure:
-An Enterprise Application registration is needed to create a service principal which can be used to connect to services and perform tasks unattended and more securely than a user account.
+<h3>Step 1 - Create an Azure AD app</h3>
+Create an Azure AD app using one of these methods and store the following information securely as it is needed:
+
+Azure app's Application ID
+Azure AD app's secret
+Azure app's Tenant ID
+Creating an Azure AD app in the Microsoft Azure portal
+See the create an Azure AD app article for the steps. You can skip the 'Role' and 'Policy' parts.
+
+Creating an Azure AD app using a script
+This section includes a sample script to create a new Azure AD app using the Azure CLI or PowerShell.
+
+Azure CLI PowerShell
+<code>
+# The app ID - $app.appid
+# The service principal object ID - $sp.objectId
+# The app key - $key.value
+
+# Sign in as a user that's allowed to create an app
+Connect-AzureAD
+
+# Create a new Azure AD web application
+$app = New-AzureADApplication -DisplayName <ApplicationName> -Homepage "https://localhost:44322" -ReplyUrls "https://localhost:44322"
+
+# Creates a service principal
+$sp = New-AzureADServicePrincipal -AppId $app.AppId
+
+# Get the service principal key
+$key = New-AzureADServicePrincipalPasswordCredential -ObjectId $sp.ObjectId
+</code>
+<h3>Step 2 - Create an Azure AD security group</h3>
+Your service principal doesn't have access to any of your Power BI content and APIs. To give the service principal access, create a security group in Azure AD, and add the service principal you created to that security group.
+
+Creating an Azure AD security group in the Microsoft Azure portal
+See the create a basic group and add members using Azure AD article for the steps.
+
+Creating an Azure AD security group using a script
+Azure CLI PowerShell
+<code>
+# Required to sign in as admin
+Connect-AzureAD
+
+# Create an Azure AD security group
+$group = New-AzureADGroup -DisplayName <GroupName> -SecurityEnabled $true -MailEnabled $false -MailNickName notSet
+
+# Add the service principal to the group
+Add-AzureADGroupMember -ObjectId $($group.ObjectId) -RefObjectId $($sp.ObjectId)
+</code>
+<h3>Step 3 - Enable the Power BI service admin settings</h3>
+For an Azure AD app to be able to access the Power BI content and APIs, a Power BI admin needs to enable service principal access in the Power BI admin portal.
 <ul>
-<li>This can be done in the Azure portal or PowerShell</li>
-<li>as shown in this this MS article <a href="https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal#create-an-azure-ad-app-by-using-powershell">Embed Power BI content</a></li>
+Navigate to to Power BI Admin Portal: https://app.powerbi.com/admin-portal/tenantSettings
+<li>Scroll down to the Developer settings section</li>
+<li>Expand the Allow service principals to use Power BI APIs setting</li>
+<li>Click on the enable toggle to enable the setting</li>
+<li>Choose Specific security groups (Recommended) in the 'Apply to' radio buttons</li>
+<li>Add the security group created in step 2 in the textbox</li>
+<li>Click on Apply button to save the setting</li>
 </ul>
+Screenshot of the Development settings in the Power BI Admin portal 
+
+<h3>Step 4 - Required API permissions</h3>
+To access the Power BI APIs vai the Power BI CLI, the service principal need several scope assigned. In the table below is an overview of the required scopes.
+
+admin	Tenant.Read.All, Tenant.ReadWrite.All
+app	App.Read.All
+capacity	Capacity.Read.All, Capacity.ReadWrite.All
+dashboard	Dashboard.Read.All, Dashboard.ReadWrite.All, Content.Create
+dataflow	Dataflow.ReadWrite.All, Dataflow.Read.All
+dataset	Dataset.ReadWrite.All, Dataset.Read.All
+feature	None
+gateway	Dataset.Read.All, Dataset.ReadWrite.All
+import	Dataset.ReadWrite.All
+report	Report.Read.All, Report.ReadWrite.All, Dataset.Read.All, Dataset.ReadWrite.All
+workspace	Workspace.Read.All, Workspace.ReadWrite.All
+Adding the scopes as API permissions can be done via the Azure Portal on the management pane of the service principal.
+
+Note
+For the Tenant.Read.All and Tenant.ReadWrite.All scopes Admin consent is needed. This can be applied via the Azure portal.
+
+Screenshot of adding API permissions for the service principal
+
+<h3>Step 5 - Add the service principal to your workspace</h3>
+To enable your Azure AD app access artifacts such as reports, dashboards and datasets in the Power BI service, add the service principal entity, or the security group that includes your service principal, as a member or admin to your workspace.
+
+Alternative you can add the service principal as Power BI administrator via Roles and administrators part of your Azure Active Directory management.
 
 <h2>PowerShell Automation</h2>
 PowerBIServicePrincipalSetup.ps1:
