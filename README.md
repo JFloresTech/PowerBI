@@ -29,7 +29,7 @@ What's included:
 <h3>Step 1 - Create an Azure AD app</h3>
 Creating an Azure AD app using a PowerShell script
 
-<Pre><code>
+``` PowerShell
 # Microsoft.Graph is very large so its better to only install the modules needed
 Import-Module Microsoft.Graph.Application
 Import-Module Microsoft.Graph.Authentication
@@ -55,12 +55,12 @@ $ServicePrincipalPassword = Add-MgServicePrincipalPassword -ServicePrincipalId $
 
 # Useful to store the Service Principal Password as JSON if you want to store it in a vault or use it else where
 ConvertTo-Json $ServicePrincipalPassword > "[Your Path here]"
-</code></pre>
+```
 <h3>Step 2 - Create an Azure AD security group</h3>
 Your service principal doesn't have access to any of your Power BI content and APIs. To give the service principal access, create a security group in Azure AD, and add the service principal you created to that security group.
 
 Creating an Azure AD security group using a PowerShell script
-<pre><code>
+``` PowerShell
 # Microsoft.Graph is very large so its better to only install the modules needed
 Import-Module Microsoft.Graph.Application
 Import-Module Microsoft.Graph.Authentication
@@ -71,7 +71,7 @@ $group = New-MgGroup -DisplayName "[Group Name Here]" -SecurityEnabled -MailEnab
 
 # Add the App to the group
 New-MgGroupMember -GroupId $($group.Id) -DirectoryObjectId $ServicePrincipalId
-</code></pre>
+```
 <h3>Step 3 - Enable the Power BI service admin settings</h3>
 For an Azure AD app to be able to access the Power BI content and APIs, a Power BI admin needs to enable service principal access in the Power BI admin portal.
 <ul>
